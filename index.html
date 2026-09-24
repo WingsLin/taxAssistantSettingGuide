@@ -62,7 +62,8 @@
     <a href="#sec7"><span>二·附、vivo 设置图示</span><span class="go">›</span></a>
     <a href="#sec8"><span>三、安卓 12+ 追加设置</span><span class="go">›</span></a>
     <a href="#sec9"><span>四、设置后自测</span><span class="go">›</span></a>
-    <a href="#sec10"><span>五、小结</span><span class="go">›</span></a>
+    <a href="#secReinstall" class="hot"><span>五、最后一招：卸载重装</span><span class="go">›</span></a>
+    <a href="#sec10"><span>六、小结</span><span class="go">›</span></a>
   </div>
 </section>
   </aside>
@@ -134,13 +135,13 @@
     <li>进"骚扰拦截 / 拦截设置"，确认没有把税局号码或验证码短信误拦、误分类到单独文件夹。</li>
   </ol>
 
-  <h3>2. 关闭 5G 消息 / RCS / 增强消息（各品牌叫法不同，逐一排查）</h3>
+  <h3>2. 关闭 5G 消息 / RCS / 增强消息 / 服务消息 / 网络信息服务（各品牌叫法不同，逐一排查）</h3>
   <p class="note">同一个功能在不同手机里名字不一样，常见叫法有：<b>5G消息、RCS、增强消息、增强短信、聊天功能、富媒体消息、服务消息、和信、飞信增强</b>等。只要看到类似字样都应关闭，让验证码退回普通短信通道。</p>
   <ol class="steps">
     <li>打开"信息"App → 右上角 <b>菜单 / 更多 → 设置</b>。</li>
     <li>在设置里逐个查找并<b>关闭</b>下列任意存在的开关：
       <ul>
-        <li><b>5G消息 / RCS</b></li>
+        <li><b>5G消息 / RCS / 网络信息服务</b></li>
         <li><b>增强消息 / 增强短信 / 增强功能</b></li>
         <li><b>聊天功能 / Chat（RCS 聊天）</b></li>
         <li><b>富媒体消息 / 多媒体增强</b></li>
@@ -331,7 +332,50 @@
 </section>
 
 <section class="card">
-  <h2 id="sec10">五、小结：这些设置到底在解决什么</h2>
+  <h2 id="secReinstall">五、最后一招：卸载后重新安装</h2>
+  <p class="note">前面各项都设置并重启自测后仍不行时，可以试这一招。它<b>尤其适合"以前一直正常、最近突然不行"</b>的情况——这类问题多是 App 本地数据 / 缓存损坏、某次更新异常、或后台状态错乱，卸载重装等于回到干净环境，往往能直接恢复。</p>
+
+  <div style="background:#eaf7f0;border:1px solid #b7e0c8;border-radius:10px;padding:12px 14px;margin:12px 0;font-size:14px">
+    <b style="color:#128a5b">✅ 什么时候用这一招</b>
+    <ul style="margin:8px 0 0;padding-left:22px">
+      <li>以前能正常收码转发，<b>最近没改任何设置却突然不行</b>。</li>
+      <li>已按第一、二节全部设置并重启，仍不检测 / 不转发。</li>
+      <li>App 界面卡顿、显示异常、状态一直"离线"但设置都正常。</li>
+    </ul>
+  </div>
+
+  <div style="background:#fdeaea;border:1px solid #f3c0c0;border-radius:10px;padding:12px 14px;margin:12px 0;font-size:14px">
+    <b style="color:#d93a3a">⚠️ 卸载前务必知道</b>
+    <ul style="margin:8px 0 0;padding-left:22px">
+      <li>卸载会<b>清空 App 内的登录状态和收码卡配置</b>，重装后要<b>重新登录、重新配置收码卡</b>。</li>
+      <li>之前授予的<b>权限、自启动、电池白名单</b>等系统设置会一并失效，重装后需<b>按第一、二节重新设置一遍</b>。</li>
+      <li>请先<b>确认手上有最新的安装包</b>（找项目负责人 / 客服要），再卸载，别卸完装不回去。</li>
+    </ul>
+  </div>
+
+  <h3>操作步骤</h3>
+  <ol class="steps">
+    <li><b>记录关键信息</b>：登录账号、收码卡号码 / 卡槽配置，避免重装后配错。</li>
+    <li><b>卸载"报税助手"</b>：长按 App 图标 → 卸载（或 <span class="path">设置 → 应用 → 报税助手 → 卸载</span>）。</li>
+    <li><b>重启手机</b>一次，清掉残留的后台状态。</li>
+    <li><b>用最新安装包重新安装</b>（务必用官方 / 项目提供的最新版本，别用旧包）。</li>
+    <li><b>重新登录</b>并<b>配置好收码卡</b>。</li>
+    <li><b>重新按第一、二节做短信 + 保活设置</b>（权限、自启动、电池白名单等全部重设）。</li>
+    <li>按第四节<b>自测</b>：发测试短信确认能收到并转发。</li>
+  </ol>
+
+  <ul class="chk">
+    <li><input type="checkbox">已确认拿到最新安装包，并记录了账号 / 收码卡配置</li>
+    <li><input type="checkbox">已卸载并重启手机后重新安装</li>
+    <li><input type="checkbox">重装后已重新登录、配卡，并按第一、二节重设权限与保活</li>
+    <li><input type="checkbox">已自测：测试短信能正常收到并转发</li>
+  </ul>
+
+  <p class="note">若<b>卸载重装并全部重设后仍不行</b>，基本可排除本机设置 / 数据问题，请按上方「⚠️ 需要提单时」的清单反馈研发 / 项目负责人。</p>
+</section>
+
+<section class="card">
+  <h2 id="sec10">六、小结：这些设置到底在解决什么</h2>
   <p>本指引针对的是<b>两类问题</b>，做的所有设置都围绕它们展开：</p>
 
   <h3>① 短信检测问题（收到验证码，但 App 没转发 / 没检测到）</h3>
