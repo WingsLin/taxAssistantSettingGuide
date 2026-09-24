@@ -37,6 +37,11 @@
   @media print{.totop{display:none!important}}
 .layout{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start} .side{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto} .main{min-width:0} @media (max-width:900px){.layout{display:block} .side{position:static;max-height:none}} 
   .toc a.active{background:var(--brand-weak)!important;color:var(--brand)!important;box-shadow:inset 3px 0 0 var(--brand);font-weight:600}
+  /* 图片响应式约束：防止移动端横向溢出，并让浏览器按宽高比预留空间，减少锚点跳转后的回流偏移 */
+  figure{margin:14px 0}
+  figure img{display:block;max-width:100%;height:auto;margin:0 auto;border:1px solid var(--line);border-radius:8px}
+  /* 锚点目标预留顶部间距，跳转后标题不贴边 */
+  h2[id],section.card[id]{scroll-margin-top:14px}
 </style>
 </head>
 <body>
@@ -431,6 +436,43 @@
     window.addEventListener('scroll',toggle,{passive:true});
     toggle();
     btn.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+  })();
+
+  /* 移动端锚点定位修正：保留平滑滚动效果；页面内大图解码后会撑开高度导致落点偏移，
+     因此在初始平滑滚动之后、分几个时间点做“平滑补正”（错开初始动画，避免打断它）；
+     用户一旦手动滑动/滚动即刻停止补正，不打断操作。 */
+  (function(){
+    var timer=null;
+    var MARGIN=14; // 与 CSS scroll-margin-top 一致，对齐后标题距顶约 14px
+    function stop(){ if(timer){clearTimeout(timer);timer=null;} }
+    ['touchstart','wheel','keydown','mousedown'].forEach(function(ev){
+      window.addEventListener(ev, stop, {passive:true});
+    });
+    function align(el){
+      var top=Math.round(el.getBoundingClientRect().top);
+      // 仅当偏移明显时才平滑补正，补正距离通常很小，观感是自然的继续滚动
+      if(Math.abs(top-MARGIN)>3){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    }
+    function jump(el){
+      stop();
+      el.scrollIntoView({behavior:'smooth', block:'start'}); // 初始平滑滚动
+      var gaps=[450,500,600,700], i=0;                        // 补正检查点，累计约 0.45/0.95/1.55/2.25s
+      (function run(){
+        if(i>=gaps.length){ timer=null; return; }
+        timer=setTimeout(function(){ align(el); i++; run(); }, gaps[i]);
+      })();
+    }
+    document.addEventListener('click',function(e){
+      var a=e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+      if(!a) return;
+      var href=a.getAttribute('href');
+      if(!href || href.length<2) return;
+      var el=document.getElementById(href.slice(1));
+      if(!el) return;
+      e.preventDefault();
+      try{ history.replaceState(null,'',href); }catch(_){}
+      jump(el);
+    });
   })();
 </script>
 </body>
